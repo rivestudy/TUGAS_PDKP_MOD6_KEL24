@@ -26,7 +26,37 @@ class Calculator {
         }
 
 };
+class Addition : public Calculator{
+    public :
+    void performAddition(int size) {
+            float* numbers = getNumbers();
+            for (int i = 1; i < size; i++) {
+                numbers[i] = numbers[i-1] + numbers[i];
+            }
+        }
+    void addition(){
+        int n = 0;
+        float numbers[999];
+        while (n < 999) {
+            cout << "Enter number #" << (n+1) << ": ";
+            string input;
+            cin >> input;
+            if (input == "x") {
+                break;
+            }
+            float num = stof(input);
+            numbers[n] = num;
+            n++;
+        }
+        setNumbers(numbers, n);
+        performAddition(n);
+        printResult(n);
+        clearResult();
+    }
+};
+
 int main()
 {
-
+    Addition add;
+    add.addition();
 }
