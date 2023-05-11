@@ -1,19 +1,27 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
 class Calculator {
     private:
         float* numbers;
+        int singlenum;
     public:
-        float* getNumbers() {
+        virtual float* getNumbers() {
             return numbers;
+        }
+        virtual int getSinglenum(){
+            return singlenum;
         }
         void setNumbers(float* numbers, int size) {
             this->numbers = new float[size];
             for (int i = 0; i < size; i++) {
                 this->numbers[i] = numbers[i];
             }
+        }
+        void setSinglenum(int singlenum){
+            this->singlenum = singlenum;
         }
         void printResult(int size) {
             cout << "Result: ";
@@ -62,8 +70,8 @@ class StandardCalculator : public Calculator {
         }
     void subtract(){
         int n = 0;
-        float numbers[100];
-        while (n < 100) {
+        float numbers[999];
+        while (n < 999) {
             cout << "Enter number #" << (n+1) << ": ";
             string input;
             cin >> input;
@@ -87,8 +95,8 @@ class StandardCalculator : public Calculator {
         }
     void multiply(){
         int n = 0;
-        float numbers[100];
-        while (n < 100) {
+        float numbers[999];
+        while (n < 999) {
             cout << "Enter number #" << (n+1) << ": ";
             string input;
             cin >> input;
@@ -112,8 +120,8 @@ class StandardCalculator : public Calculator {
         }
     void divide(){
         int n = 0;
-        float numbers[100];
-        while (n < 100) {
+        float numbers[999];
+        while (n < 999) {
             cout << "Enter number #" << (n+1) << ": ";
             string input;
             cin >> input;
@@ -150,9 +158,29 @@ class StandardCalculator : public Calculator {
         }
     }
 };
-
+class ScientificCalculator : public Calculator {
+    public :
+    void performSqrt(){
+        int numb = getSinglenum();
+        int sqroot = sqrt(numb);
+        cout << sqroot;
+    }
+    void squareroot(){
+    cout << "Enter number = ";
+    string input;
+    cin >> input;
+    if (input == "x"){
+    }
+    int num = stoi(input);
+    setSinglenum(num);
+    performSqrt();
+    }
+} ;
 int main()
 {
     StandardCalculator standard;
+    ScientificCalculator scientific;
     standard.standardMenu();
+    scientific.squareroot();
+
 }
