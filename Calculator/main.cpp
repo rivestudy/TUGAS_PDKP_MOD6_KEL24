@@ -26,34 +26,7 @@ class Calculator {
         }
 
 };
-class Addition : public Calculator{
-    public :
-    void performAddition(int size) {
-            float* numbers = getNumbers();
-            for (int i = 1; i < size; i++) {
-                numbers[i] = numbers[i-1] + numbers[i];
-            }
-        }
-    void addition(){
-        int n = 0;
-        float numbers[999];
-        while (n < 999) {
-            cout << "Enter number #" << (n+1) << ": ";
-            string input;
-            cin >> input;
-            if (input == "x") {
-                break;
-            }
-            float num = stof(input);
-            numbers[n] = num;
-            n++;
-        }
-        setNumbers(numbers, n);
-        performAddition(n);
-        printResult(n);
-        clearResult();
-    }
-};
+
 class Subtract : public Calculator{
     public :
     void performSubtraction(int size) {
@@ -141,14 +114,60 @@ class Divide : public Calculator{
     }
 };
 
+class StandardCalculator : public Calculator {
+    public :
+    void performAddition(int size) {
+        float* numbers = getNumbers();
+        for (int i = 1; i < size; i++) {
+            numbers[i] = numbers[i-1] + numbers[i];
+        }
+    }
+    void addition(){
+        int n = 0;
+        float numbers[999];
+        while (n < 999) {
+            cout << "Enter number #" << (n+1) << ": ";
+            string input;
+            cin >> input;
+            if (input == "x") {
+                break;
+            }
+            float num = stof(input);
+            numbers[n] = num;
+            n++;
+        }
+        setNumbers(numbers, n);
+        performAddition(n);
+        printResult(n);
+        clearResult();
+    }
+    void standardMenu() {
+        string menuStan;
+        while (true) {
+            cout << "Standard Calculator \n1.) Addition\n2.) Subtraction\n3.) Multiplication\n4.) Division\n(x) to close\n=";
+            cin >> menuStan;
+            if (menuStan == "1"){
+                addition();
+            } else if (menuStan == "2"){
+                Subtract sub;
+                sub.subtract();
+            } else if (menuStan == "3"){
+                Multiply mul;
+                mul.multiply();
+            } else if (menuStan == "4"){
+                Divide div;
+                div.divide();
+            } else if (menuStan == "x"){
+                break;
+            } else {
+                cout << "Invalid input. Please try again.\n";
+            }
+        }
+    }
+};
+
 int main()
 {
-    Addition add;
-    add.addition();
-    Subtract sub;
-    sub.subtract();
-    Multiply mul;
-    mul.multiply();
-    Divide div;
-    div.divide();
+    StandardCalculator standard;
+    standard.standardMenu();
 }
