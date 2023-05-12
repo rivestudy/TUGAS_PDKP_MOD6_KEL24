@@ -48,9 +48,7 @@ class Calculator {
         void clearSing(){
         singlenum = 0;
         }
-
 };
-
 class StandardCalculator : public Calculator {
     public :
     void performAddition(int size) {
@@ -156,7 +154,7 @@ class StandardCalculator : public Calculator {
     void standardMenu() {
         string menuStan;
         while (true) {
-            cout << "Standard Calculator \n=========================\n1.) Addition\n2.) Subtraction\n3.) Multiplication\n4.) Division\n(x) to close\n=";
+            cout << "\nStandard Calculator \n=========================\n1.) Addition\n2.) Subtraction\n3.) Multiplication\n4.) Division\n(x) to close\n=";
             cin >> menuStan;
             if (menuStan == "1"){
                 addition();
@@ -247,7 +245,7 @@ class ScientificCalculator : public Calculator {
     void scientificMenu(){
         string menuScie;
         while(true){
-            cout << "Scientific Calculator\n=========================\n1.) SquareRoot\n2.) Exponent\n3.) Factorial\n(x) to close\n = ";
+            cout << "\nScientific Calculator\n=========================\n1.) SquareRoot\n2.) Exponent\n3.) Factorial\n(x) to close\n= ";
             cin >> menuScie;
             if (menuScie == "1"){
                 squareroot();
@@ -362,7 +360,7 @@ class ConversionCalculator : public Calculator{
     void conversionMenu(){
         string menuConv;
         while(true){
-            cout << "Conversion Calculator\n=========================\n1.) IDR to USD\n2.) USD to IDR\n3.) IDR to GBP\n4.) GBP to IDR\n5.) IDR to JPY\n6.) JPY to IDR\n(x) to close\n = ";
+            cout << "\nConversion Calculator\n=========================\n1.) IDR to USD\n2.) USD to IDR\n3.) IDR to GBP\n4.) GBP to IDR\n5.) IDR to JPY\n6.) JPY to IDR\n(x) to close\n= ";
             cin >> menuConv;
                 if (menuConv == "1"){
                     rpdollarConvert();
@@ -386,13 +384,25 @@ class ConversionCalculator : public Calculator{
 };
 int main()
 {
-    StandardCalculator standard;
-    ScientificCalculator scientific;
-    ConversionCalculator convert;
-
-    cout << "Calculator\n=========================\n1.) Standard Calculator\n2.) Scientific Calculator\n3.) Conversion Calculator\n(x) to close\n = ";
-    convert.conversionMenu();
-    standard.standardMenu();
-    scientific.scientificMenu();
-
+StandardCalculator standard;
+ScientificCalculator scientific;
+ConversionCalculator convert;
+while (true){
+    cout << "\nCalculator\n=========================\n1.) Standard Calculator\n2.) Scientific Calculator\n3.) Conversion Calculator\n(x) to close\n= ";
+    string mainmenu;
+    cin >> mainmenu;
+        if (mainmenu == "1"){
+            standard.standardMenu();
+        } else if (mainmenu == "2"){
+            scientific.scientificMenu();
+        } else if (mainmenu == "3"){
+            convert.conversionMenu();
+        } else if (mainmenu == "x"){
+            break;
+        } else{
+            cout << "Invalid input. Please try again.\n";
+        }
+    }
 }
+
+
