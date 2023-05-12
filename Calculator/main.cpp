@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
@@ -38,7 +39,7 @@ class Calculator {
         void printSing(){
             cout << "Result: ";
             float singlenum = getSinglenum();
-            cout << singlenum << endl;
+            cout << fixed << std::setprecision(2) << singlenum << endl;
         }
         void clearResult() {
         delete[] numbers;
@@ -155,7 +156,7 @@ class StandardCalculator : public Calculator {
     void standardMenu() {
         string menuStan;
         while (true) {
-            cout << "Standard Calculator \n1.) Addition\n2.) Subtraction\n3.) Multiplication\n4.) Division\n(x) to close\n=";
+            cout << "Standard Calculator \n=========================\n1.) Addition\n2.) Subtraction\n3.) Multiplication\n4.) Division\n(x) to close\n=";
             cin >> menuStan;
             if (menuStan == "1"){
                 addition();
@@ -237,7 +238,7 @@ class ScientificCalculator : public Calculator {
             if (input == "x"){
                     break;
                 }
-            float num = stoi(input);
+            float num = stof(input);
             performFactorial(num);
             printSing();
             clearSing();
@@ -246,7 +247,7 @@ class ScientificCalculator : public Calculator {
     void scientificMenu(){
         string menuScie;
         while(true){
-            cout << "Scientific Calculator\n1.) SquareRoot\n2.) Exponent\n3.) Factorial\n(x) to close\n = ";
+            cout << "Scientific Calculator\n=========================\n1.) SquareRoot\n2.) Exponent\n3.) Factorial\n(x) to close\n = ";
             cin >> menuScie;
             if (menuScie == "1"){
                 squareroot();
@@ -262,11 +263,136 @@ class ScientificCalculator : public Calculator {
         }
     }
 } ;
+class ConversionCalculator : public Calculator{
+    public :
+    void performDivConvert(float dec, float val){
+        float conv;
+        conv = dec / val;
+        setSinglenum(conv);
+    }
+    void performMulConvert(float dec, float val){
+        float conv;
+        conv = dec * val;
+        setSinglenum(conv);
+        }
+    void rpdollarConvert(){
+        while(true){
+        cout << "Enter Rupiah value = Rp.";
+        string input;
+        cin >> input;
+        if (input == "x"){
+                break;
+            }
+        float num = stof(input);
+        performDivConvert(num , 14800);
+        printSing();
+        clearSing();
+        }
+    }
+    void dollarrpConvert(){
+        while(true){
+        cout << "Enter Dollar value = $";
+        string input;
+        cin >> input;
+        if (input == "x"){
+                break;
+            }
+        float num = stof(input);
+        performMulConvert(num , 14800);
+        printSing();
+        clearSing();
+        }
+    }
+    void rppsConvert(){
+        while(true){
+        cout << "Enter Rupiah value = Rp.";
+        string input;
+        cin >> input;
+        if (input == "x"){
+                break;
+            }
+        float num = stof(input);
+        performDivConvert(num , 18500);
+        printSing();
+        clearSing();
+        }
+    }
+    void psrpConvert(){
+        while(true){
+        cout << "Enter Pound Sterling value = £";
+        string input;
+        cin >> input;
+        if (input == "x"){
+                break;
+            }
+        float num = stof(input);
+        performMulConvert(num , 18500);
+        printSing();
+        clearSing();
+        }
+    }
+    void rpyenConvert(){
+        while(true){
+        cout << "Enter Rupiah value = Rp.";
+        string input;
+        cin >> input;
+        if (input == "x"){
+                break;
+            }
+        float num = stof(input);
+        performDivConvert(num , 109.70);
+        printSing();
+        clearSing();
+        }
+    }
+    void yenrpConvert(){
+        while(true){
+        cout << "Enter Yen value = ¥";
+        string input;
+        cin >> input;
+        if (input == "x"){
+                break;
+            }
+        float num = stof(input);
+        performMulConvert(num , 109.70);
+        printSing();
+        clearSing();
+        }
+    }
+    void conversionMenu(){
+        string menuConv;
+        while(true){
+            cout << "Conversion Calculator\n=========================\n1.) IDR to USD\n2.) USD to IDR\n3.) IDR to GBP\n4.) GBP to IDR\n5.) IDR to JPY\n6.) JPY to IDR\n(x) to close\n = ";
+            cin >> menuConv;
+                if (menuConv == "1"){
+                    rpdollarConvert();
+                } else if (menuConv == "2"){
+                    dollarrpConvert();
+                } else if (menuConv == "3"){
+                    rppsConvert();
+                } else if (menuConv == "4"){
+                    psrpConvert();
+                } else if (menuConv == "5"){
+                    rpyenConvert();
+                } else if (menuConv == "6"){
+                    yenrpConvert();
+                } else if (menuConv == "x"){
+                    break;
+                } else {
+                    cout << "Invalid input. Please try again.\n";
+                }
+        }
+    }
+};
 int main()
 {
     StandardCalculator standard;
     ScientificCalculator scientific;
-    cout
+    ConversionCalculator convert;
+
+    cout << "Calculator\n=========================\n1.) Standard Calculator\n2.) Scientific Calculator\n3.) Conversion Calculator\n(x) to close\n = ";
+    convert.conversionMenu();
     standard.standardMenu();
     scientific.scientificMenu();
 
+}
