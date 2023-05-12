@@ -6,12 +6,13 @@ using namespace std;
 class Calculator {
     private:
         float* numbers;
-        int singlenum, repeat;
+        float singlenum;
+        int repeat;
     public:
         virtual float* getNumbers(){
             return numbers;
         }
-        virtual int getSinglenum(){
+        virtual float getSinglenum(){
             return singlenum;
         }
         virtual int getRep(){
@@ -23,7 +24,7 @@ class Calculator {
                 this->numbers[i] = numbers[i];
             }
         }
-        void setSinglenum(int singlenum){
+        void setSinglenum(float singlenum){
             this->singlenum = singlenum;
         }
         void setRepeat(int repeat){
@@ -36,7 +37,7 @@ class Calculator {
         }
         void printSing(){
             cout << "Result: ";
-            int singlenum = getSinglenum();
+            float singlenum = getSinglenum();
             cout << singlenum << endl;
         }
         void clearResult() {
@@ -175,47 +176,97 @@ class StandardCalculator : public Calculator {
 class ScientificCalculator : public Calculator {
     public :
     void performSqrt(){
-        int numb = getSinglenum();
-        int sqroot = sqrt(numb);
+        float numb = getSinglenum();
+        float sqroot = sqrt(numb);
         setSinglenum(sqroot);
     }
     void squareroot(){
-        cout << "Enter number = ";
-        string input;
-        cin >> input;
-        int num = stoi(input);
-        setSinglenum(num);
-        performSqrt();
-        printSing();
-        clearSing();
+        while (true){
+            cout << "Enter number = ";
+            string input;
+            cin >> input;
+            if (input == "x"){
+                break;
+            }
+            float num = stof(input);
+            setSinglenum(num);
+            performSqrt();
+            printSing();
+            clearSing();
+        }
     }
-    void performExponent(int numb, int power){
-        int exponent = 1;
+    void performExponent(float numb, int power){
+        float exponent = 1;
         for (int i = 0; i < power; i++) {
             exponent *= numb;
             setSinglenum(exponent);
         }
     }
     void exponent(){
-        cout << "Enter number = ";
-        string input;
-        int rep;
-        cin >> input;
-        cout << "Enter exponent degree = ";
-        cin >>  rep;
-        int num = stoi(input);
-        performExponent(num, rep);
-        printSing();
-        clearSing();
+        while(true){
+            cout << "Enter number = ";
+            string input;
+            int rep;
+            cin >> input;
+            if (input == "x"){
+                    break;
+                }
+            cout << "Enter exponent degree = ";
+            cin >>  rep;
+            if (input == "x"){
+                    break;
+                }
+            float num = stof(input);
+            performExponent(num, rep);
+            printSing();
+            clearSing();
+        }
     }
-    void performFactorial(int numb){
+    void performFactorial(float numb){
+        float fact = 1;
+        for (float i = 1; i < numb + 1 ; i++) {
+            fact *= i;
+            setSinglenum(fact);
+        }
+    }
+    void factorial(){
+        while(true){
+            cout << "Enter number = ";
+            string input;
+            cin >> input;
+            if (input == "x"){
+                    break;
+                }
+            float num = stoi(input);
+            performFactorial(num);
+            printSing();
+            clearSing();
+        }
+    }
+    void scientificMenu(){
+        string menuScie;
+        while(true){
+            cout << "Scientific Calculator\n1.) SquareRoot\n2.) Exponent\n3.) Factorial\n(x) to close\n = ";
+            cin >> menuScie;
+            if (menuScie == "1"){
+                squareroot();
+            } else if (menuScie == "2"){
+                exponent();
+            } else if (menuScie == "3"){
+                factorial();
+            } else if (menuScie == "x"){
+                break;
+            } else {
+                cout << "Invalid input. Please try again.\n";
+            }
+        }
     }
 } ;
 int main()
 {
     StandardCalculator standard;
     ScientificCalculator scientific;
+    cout
     standard.standardMenu();
-    scientific.exponent();
+    scientific.scientificMenu();
 
-}
